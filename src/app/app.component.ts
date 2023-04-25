@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
+import { CommanderCard } from './shared/interfaces/commander-card';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import { OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'deckBuilder';
   cards: any[] = [];
-  commanders: any[] = [];
+  commanders: CommanderCard[] = [];
 
   constructor(private readonly http: HttpClient) {}
 
@@ -21,8 +22,21 @@ export class AppComponent implements OnInit {
   }
 
   getCommander() {
-    this.http.get('https://api.scryfall.com/cards/random?q=is%3Acommander').subscribe((data) => {
-      this.commanders.push(data);
+    this.http.get('https://api.scryfall.com/cards/random?q=is%3Acommander').subscribe((data: any) => {
+      const card: CommanderCard = {
+        uuid: data.id,
+        name: data.name,
+        cmc: data.cmc,
+        colors: data.colors,
+        colorIdentity: data.color_identity,
+        image_uris: data.image_uris,
+        keywords: data.keywords,
+        mana_cost: data.mana_cost,
+        power: data.power,
+        toughness: data.toughness
+      };
+      this.commanders.push(card);
+      console.log(this.commanders);
     });
   }
 
