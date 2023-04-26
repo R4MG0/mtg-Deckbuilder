@@ -1,6 +1,6 @@
 <h1>Deck builder</h1>
-<!-- <div class="container"> -->
-<button (click)="getCommander()">Get a Random Commander</button>
+<div class="container">
+  <!-- <button (click)="getCommander()">Get a Random Commander</button>
 <br />
 <ng-container *ngFor="let commander of commanders">
   <div class="imageContainer">
@@ -8,7 +8,17 @@
       [src]="commander.image_uris.png"
       alt="Image of {{ commander.name }}"
     /></div
-></ng-container>
-<!-- <pre>{{cards |json}}</pre> -->
-<!-- </div> -->
-<router-outlet></router-outlet>
+></ng-container> -->
+  <div class="search">
+    <form (submit)="submit()" [formGroup]="form">
+      <input
+        type="text"
+        placeholder="Name of the Card"
+        formControlName="nameOfCard"
+        class="inputCardName"
+      />
+    </form>
+    <!-- <pre>{{ form.value | json }}</pre> -->
+  </div>
+  <router-outlet></router-outlet>
+</div>

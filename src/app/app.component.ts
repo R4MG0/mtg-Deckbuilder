@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { CommanderCard } from './shared/interfaces/commander-card';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,9 @@ export class AppComponent implements OnInit {
   title = 'deckBuilder';
   cards: any[] = [];
   commanders: CommanderCard[] = [];
+  form = new FormGroup({
+    nameOfCard: new FormControl(''),
+  })
 
   constructor(private readonly http: HttpClient) {}
 
@@ -38,6 +42,10 @@ export class AppComponent implements OnInit {
       this.commanders.push(card);
       console.log(this.commanders);
     });
+  }
+
+  submit() {
+    alert('submit')
   }
 
 
