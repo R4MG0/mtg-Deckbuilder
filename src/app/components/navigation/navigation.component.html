@@ -1,0 +1,8 @@
+<nav>
+  <a class="title" href="/home">Deck Builder</a>
+  <ul>
+    <li *ngFor="let item of menuItems">
+      <a href="{{ item.link }}">{{ item.label }}</a>
+    </li>
+  </ul>
+</nav>

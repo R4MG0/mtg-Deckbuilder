@@ -1,0 +1,45 @@
+$nav-color: #333;
+$nav-bg-color: #eee;
+$nav-link-color: #777;
+$nav-link-hover-color: #333;
+$nav-link-active-color: #f00;
+
+nav {
+  background-color: $nav-bg-color;
+  display: flex;
+  align-items: center;
+
+  ul {
+    list-style: none;
+    margin-left: 1em;
+    padding: 0;
+
+    li {
+      display: inline-block;
+
+      a {
+        color: $nav-link-color;
+        display: block;
+        padding: 10px;
+        text-decoration: none;
+
+        &:hover {
+          color: $nav-link-hover-color;
+        }
+
+        &.active {
+          color: $nav-link-active-color;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
+
+.title {
+  font-size: 1.5em;
+  text-decoration: none;
+  color: black;
+  margin: 0;
+  padding: 0;
+}
