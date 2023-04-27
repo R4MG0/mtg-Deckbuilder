@@ -1,1 +1,18 @@
-<p>game works!</p>
+<div class="container">
+  <div class="cardContainer">
+    <ng-container *ngFor="let card of hand">
+      <img
+        [src]="card.img"
+        alt="Foto of the card {{ card.name }}"
+        class="card"
+      />
+    </ng-container>
+    <div class="library">
+      <img
+        src="../../shared/image/Magic_card_back.png"
+        alt="Library"
+        class="card"
+      />
+    </div>
+  </div>
+</div>
