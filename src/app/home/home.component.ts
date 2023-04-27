@@ -41,7 +41,6 @@ title = 'deckBuilder';
         toughness: data.toughness
       };
       this.commanders.push(card);
-      console.log(this.commanders);
     });
   }
   submit() {

@@ -8,6 +8,7 @@ const routes: Routes = [{
   path: '', redirectTo: 'home', pathMatch: 'full'
 },
   { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
+  { path: 'deck', loadChildren: () => import('./deck/deck.module').then(m => m.DeckModule) },
   ];
 
 @NgModule({

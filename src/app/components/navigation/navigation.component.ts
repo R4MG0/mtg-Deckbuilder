@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class NavigationComponent {
  menuItems = [
     { label: 'Home', link: '/' },
-    { label: 'About', link: '/about' },
+    { label: 'Deck', link: '/deck' },
     { label: 'Contact', link: '/contact' }
   ];
 }
