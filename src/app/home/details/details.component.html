@@ -1,0 +1,7 @@
+<p>details works!</p>
+
+<h1>{{ cardName }}</h1>
+
+<pre>{{ card | json }}</pre>
+<img [src]="card.image_uris?.normal" alt="Image of {{ card.name }}" />
+<app-not-found *ngIf="displayNotFound"></app-not-found>
