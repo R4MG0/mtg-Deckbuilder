@@ -7,12 +7,6 @@
         class="card"
       />
     </ng-container>
-    <div class="library">
-      <img
-        src="../../shared/image/Magic_card_back.png"
-        alt="Library"
-        class="card"
-      />
-    </div>
+    <app-library [deck]="deck" (newCard)="onChangeHand($event)"></app-library>
   </div>
 </div>

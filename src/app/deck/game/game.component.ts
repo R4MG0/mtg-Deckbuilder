@@ -19,11 +19,10 @@ export class GameComponent implements OnInit {
       this.hand.push(arrCards[i]);
       // arrCards.splice(0,i);
     }
-    // this.deck.push(...arrCards);
-    console.log('hand:', this.hand);
 
+    this.deck.push(...arrCards);
   }
-  test(){
-    alert();
+  onChangeHand(card: Card) {
+    this.hand.push(card);
   }
 }
