@@ -1,7 +1,27 @@
-<div class="library">
-  <img
-    src="../../shared/image/Magic_card_back.jpg"
-    alt="Library"
-    class="card"
-  />
+<div class="library" (contextmenu)="onContextMenu($event)">
+  <img *ngIf="!reveal" src="" alt="Library" class="card" />
+  <img *ngIf="reveal" [src]="getImageSrcOfTopCardOfLibrary()" class="card" />
 </div>
+
+<div
+  style="visibility: hidden; position: fixed"
+  [style.left]="contextMenuPosition.x"
+  [style.top]="contextMenuPosition.y"
+  [matMenuTriggerFor]="contextMenu"
+></div>
+<mat-menu #contextMenu="matMenu">
+  <ng-template matMenuContent let-item="item">
+    <button mat-menu-item (click)="draw()">Draw</button>
+    <button mat-menu-item (click)="revealTopCard()">Reveal</button>
+    <button mat-menu-item (click)="onContextMenuAction3()">
+      Search Library
+    </button>
+    <button mat-menu-item (click)="onContextMenuAction4()">
+      Shuffle Library
+    </button>
+    <button mat-menu-item (click)="onContextMenuAction5()">Mill X cards</button>
+    <!-- <button mat-menu-item (click)="onContextMenuAction2(item)">Reveal</button>
+    <button mat-menu-item (click)="onContextMenuAction2(item)">Reveal</button>
+    <button mat-menu-item (click)="onContextMenuAction2(item)">Reveal</button> -->
+  </ng-template>
+</mat-menu>

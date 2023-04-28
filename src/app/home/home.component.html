@@ -1,9 +1,4 @@
 <div class="container">
-  <img
-    *ngIf="searchedCard !== null || searchedCard !== undefined"
-    [src]="searchedCard.image_uris?.png"
-    alt="Image of {{ searchedCard.name }}"
-  />
   <div class="search">
     <form (submit)="submit()" [formGroup]="form">
       <input

@@ -15,7 +15,7 @@ export class DetailsComponent implements OnInit{
   constructor(private readonly route: ActivatedRoute, private readonly scryfallApiService: ScryfallAPIService) { }
   ngOnInit(): void {
     this.cardName = String(this.route.snapshot.paramMap.get('cardName'));
-    this.card = this.scryfallApiService.getCardByName(this.cardName);
+    this.card = this.scryfallApiService.getCardByName(this.cardName, 'commander') as CommanderCard;
 
   }
 }

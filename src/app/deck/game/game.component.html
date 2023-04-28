@@ -1,4 +1,27 @@
-<div class="container">
+<button
+  class="buttonForMultipleActions"
+  mat-icon-button
+  [matMenuTriggerFor]="menu"
+  aria-label="Example icon-button with a menu"
+>
+  <mat-icon>more_vert</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="commanderAvailable()">
+    <mat-icon>dialpad</mat-icon>
+    <span>Commander</span>
+  </button>
+  <button mat-menu-item (click)="graveyardAvailable()">
+    <mat-icon>voicemail</mat-icon>
+    <span>Graveyard</span>
+  </button>
+  <button mat-menu-item disabled>
+    <mat-icon>notifications_off</mat-icon>
+    <span>Disable alerts</span>
+  </button>
+</mat-menu>
+
+<div class="bigCardcontainer">
   <div class="cardContainer">
     <ng-container *ngFor="let card of hand">
       <img
@@ -7,6 +30,10 @@
         class="card"
       />
     </ng-container>
-    <app-library [deck]="deck" (newCard)="onChangeHand($event)"></app-library>
+    <app-library
+      class="library"
+      [deck]="library"
+      (newCard)="onChangeHand($event)"
+    ></app-library>
   </div>
 </div>
