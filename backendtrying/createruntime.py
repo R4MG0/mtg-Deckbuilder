@@ -24,75 +24,49 @@ conn.execute('''CREATE TABLE players
              (id INTEGER PRIMARY KEY AUTOINCREMENT,
              name TEXT NOT NULL,
              deck_name TEXT NOT NULL)''')
-conn.execute('''CREATE TABLE hand_player1
+conn.execute('''CREATE TABLE hand
              (id INTEGER PRIMARY KEY AUTOINCREMENT,
              name TEXT NOT NULL,
-             img_url TEXT NOT NULL,
-             deck_name TEXT NOT NULL,
-             player_name TEXT NOT NULL)''')
+             img TEXT NOT NULL,
+             deck TEXT NOT NULL,
+             controller TEXT NOT NULL)''')
 
-conn.execute('''CREATE TABLE hand_player2
+conn.execute('''CREATE TABLE library
              (id INTEGER PRIMARY KEY AUTOINCREMENT,
              name TEXT NOT NULL,
-             img_url TEXT NOT NULL,
-             deck_name TEXT NOT NULL,
-             player_name TEXT NOT NULL)''')
+             img TEXT NOT NULL,
+             deck TEXT NOT NULL,
+             controller TEXT NOT NULL)''')
 
-conn.execute('''CREATE TABLE library_player1
+conn.execute('''CREATE TABLE graveyard
              (id INTEGER PRIMARY KEY AUTOINCREMENT,
              name TEXT NOT NULL,
-             img_url TEXT NOT NULL,
-             deck_name TEXT NOT NULL,
-             player_name TEXT NOT NULL)''')
+             img TEXT NOT NULL,
+             deck TEXT NOT NULL,
+             controller TEXT NOT NULL)''')
 
-conn.execute('''CREATE TABLE library_player2
+conn.execute('''CREATE TABLE phasedout
              (id INTEGER PRIMARY KEY AUTOINCREMENT,
              name TEXT NOT NULL,
-             img_url TEXT NOT NULL,
-             deck_name TEXT NOT NULL,
-             player_name TEXT NOT NULL)''')
+             img TEXT NOT NULL,
+             deck TEXT NOT NULL,
+             controller TEXT NOT NULL)''')
 
-conn.execute('''CREATE TABLE graveyards_player1
+conn.execute('''CREATE TABLE battlefield
              (id INTEGER PRIMARY KEY AUTOINCREMENT,
              name TEXT NOT NULL,
-             img_url TEXT NOT NULL,
-             deck_name TEXT NOT NULL,
-             player_name TEXT NOT NULL)''')
+             img TEXT NOT NULL,
+             deck TEXT NOT NULL,
+             controller TEXT NOT NULL)''')
 
-conn.execute('''CREATE TABLE graveyards_player2
+conn.execute('''CREATE TABLE exile
              (id INTEGER PRIMARY KEY AUTOINCREMENT,
              name TEXT NOT NULL,
-             img_url TEXT NOT NULL,
-             deck_name TEXT NOT NULL,
-             player_name TEXT NOT NULL)''')
+             img TEXT NOT NULL,
+             deck TEXT NOT NULL,
+             controller TEXT NOT NULL)''')
 
-conn.execute('''CREATE TABLE battlefields_player1
-             (id INTEGER PRIMARY KEY AUTOINCREMENT,
-             name TEXT NOT NULL,
-             img_url TEXT NOT NULL,
-             deck_name TEXT NOT NULL,
-             player_name TEXT NOT NULL)''')
 
-conn.execute('''CREATE TABLE battlefields_player2
-             (id INTEGER PRIMARY KEY AUTOINCREMENT,
-             name TEXT NOT NULL,
-             img_url TEXT NOT NULL,
-             deck_name TEXT NOT NULL,
-             player_name TEXT NOT NULL)''')
-
-conn.execute('''CREATE TABLE exiles_player1
-             (id INTEGER PRIMARY KEY AUTOINCREMENT,
-             name TEXT NOT NULL,
-             img_url TEXT NOT NULL,
-             deck_name TEXT NOT NULL,
-             player_name TEXT NOT NULL)''')
-
-conn.execute('''CREATE TABLE exiles_player2
-             (id INTEGER PRIMARY KEY AUTOINCREMENT,
-             name TEXT NOT NULL,
-             img_url TEXT NOT NULL,
-             deck_name TEXT NOT NULL,
-             player_name TEXT NOT NULL)''')
 
 # Commit changes and close the connection
 conn.commit()

@@ -18,11 +18,10 @@ def create_database():
     c.execute('''CREATE TABLE IF NOT EXISTS Cards
                  (id INTEGER PRIMARY KEY AUTOINCREMENT,
                  name TEXT,
-                 amount TEXT,
-                 img_url TEXT,
-                 deck_name TEXT,
-                 deck_id INTEGER,
-                 FOREIGN KEY(deck_id) REFERENCES Decks(id))''')
+                 img TEXT,
+                 deck TEXT,
+                 type TEXT,
+                 controller TEXT)''')
 
     # Save the changes and close the connection
     conn.commit()
