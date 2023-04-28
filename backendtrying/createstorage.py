@@ -20,8 +20,7 @@ def create_database():
                  name TEXT,
                  img TEXT,
                  deck TEXT,
-                 type TEXT,
-                 controller TEXT)''')
+                 type TEXT)''')
 
     # Save the changes and close the connection
     conn.commit()

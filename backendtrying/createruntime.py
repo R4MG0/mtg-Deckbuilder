@@ -7,23 +7,19 @@ conn = sqlite3.connect('runtime.db')
 
 
 conn.execute('''DROP TABLE IF EXISTS players''')
-conn.execute('''DROP TABLE IF EXISTS hand_player1''')
-conn.execute('''DROP TABLE IF EXISTS hand_player2''')
-conn.execute('''DROP TABLE IF EXISTS library_player1''')
-conn.execute('''DROP TABLE IF EXISTS library_player2''')
-conn.execute('''DROP TABLE IF EXISTS graveyards_player1''')
-conn.execute('''DROP TABLE IF EXISTS graveyards_player2''')
-conn.execute('''DROP TABLE IF EXISTS battlefields_player1''')
-conn.execute('''DROP TABLE IF EXISTS battlefields_player2''')
-conn.execute('''DROP TABLE IF EXISTS exiles_player1''')
-conn.execute('''DROP TABLE IF EXISTS exiles_player2''')
+conn.execute('''DROP TABLE IF EXISTS hand''')
+conn.execute('''DROP TABLE IF EXISTS library''')
+conn.execute('''DROP TABLE IF EXISTS graveyard''')
+conn.execute('''DROP TABLE IF EXISTS battlefield''')
+conn.execute('''DROP TABLE IF EXISTS exile''')
+conn.execute('''DROP TABLE IF EXISTS phasedout''')
 
 
 # Create the tables
 conn.execute('''CREATE TABLE players
              (id INTEGER PRIMARY KEY AUTOINCREMENT,
              name TEXT NOT NULL,
-             deck_name TEXT NOT NULL)''')
+             deck TEXT NOT NULL)''')
 conn.execute('''CREATE TABLE hand
              (id INTEGER PRIMARY KEY AUTOINCREMENT,
              name TEXT NOT NULL,
@@ -45,13 +41,6 @@ conn.execute('''CREATE TABLE graveyard
              deck TEXT NOT NULL,
              controller TEXT NOT NULL)''')
 
-conn.execute('''CREATE TABLE phasedout
-             (id INTEGER PRIMARY KEY AUTOINCREMENT,
-             name TEXT NOT NULL,
-             img TEXT NOT NULL,
-             deck TEXT NOT NULL,
-             controller TEXT NOT NULL)''')
-
 conn.execute('''CREATE TABLE battlefield
              (id INTEGER PRIMARY KEY AUTOINCREMENT,
              name TEXT NOT NULL,
@@ -66,6 +55,12 @@ conn.execute('''CREATE TABLE exile
              deck TEXT NOT NULL,
              controller TEXT NOT NULL)''')
 
+conn.execute('''CREATE TABLE phasedout
+             (id INTEGER PRIMARY KEY AUTOINCREMENT,
+             name TEXT NOT NULL,
+             img TEXT NOT NULL,
+             deck TEXT NOT NULL,
+             controller TEXT NOT NULL)''')
 
 
 # Commit changes and close the connection
