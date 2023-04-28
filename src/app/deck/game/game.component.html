@@ -21,19 +21,26 @@
   </button>
 </mat-menu>
 
-<div class="bigCardcontainer">
-  <div class="cardContainer">
-    <ng-container *ngFor="let card of hand">
-      <img
-        [src]="card.img"
-        alt="Foto of the card {{ card.name }}"
-        class="card"
-      />
-    </ng-container>
-    <app-library
-      class="library"
-      [deck]="library"
-      (newCard)="onChangeHand($event)"
-    ></app-library>
+<div class="footerContainer">
+  <div class="commander"></div>
+  <div class="bigCardcontainer">
+    <!-- <div class="graveyardContainer"> -->
+    <!-- <div class="graveyard"></div> -->
+    <!-- </div> -->
+    <div class="cardContainer">
+      <ng-container *ngFor="let card of hand">
+        <img
+          [src]="card.img"
+          alt="Foto of the card {{ card.name }}"
+          class="card"
+        />
+      </ng-container>
+      <app-library
+        class="library"
+        [deck]="library"
+        (newCard)="onChangeHand($event)"
+      ></app-library>
+      <app-graveyard></app-graveyard>
+    </div>
   </div>
 </div>

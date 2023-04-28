@@ -6,12 +6,14 @@ import { GameComponent } from './game.component';
 import { LibraryComponent } from './components/library/library.component';
 import { MatListModule} from '@angular/material/list';
 import { MatIconModule} from '@angular/material/icon';
+import { GraveyardComponent } from './components/graveyard/graveyard.component';
 
 
 @NgModule({
   declarations: [
     GameComponent,
-    LibraryComponent
+    LibraryComponent,
+    GraveyardComponent
   ],
   imports: [
     CommonModule,

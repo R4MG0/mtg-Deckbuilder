@@ -16,7 +16,6 @@ constructor() {
 }
 
 ngOnInit(): void {
-  console.log('deck: ', this.deck)
 }
  @HostListener("click", ["$event"])
   onClick() {

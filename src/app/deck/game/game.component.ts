@@ -32,7 +32,7 @@ export class GameComponent implements OnInit {
   onChangeHand(card: Card) {
     this.hand.push(card);
     this.library.shift();
-    console.log('library: ', this.library)
+    // console.log('library: ', this.library)
     this.library.push(this.scryfallService.getCardByName('plains', 'card') as Card);
   }
 }
