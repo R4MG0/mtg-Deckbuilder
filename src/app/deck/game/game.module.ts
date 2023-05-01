@@ -7,6 +7,8 @@ import { LibraryComponent } from './components/library/library.component';
 import { MatListModule} from '@angular/material/list';
 import { MatIconModule} from '@angular/material/icon';
 import { GraveyardComponent } from './components/graveyard/graveyard.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+
 
 
 @NgModule({
@@ -20,7 +22,8 @@ import { GraveyardComponent } from './components/graveyard/graveyard.component';
     GameRoutingModule,
     MatMenuModule,
     MatListModule,
-    MatIconModule
+    MatIconModule,
+    DragDropModule
   ]
 })
 export class GameModule { }

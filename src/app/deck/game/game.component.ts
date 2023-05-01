@@ -12,7 +12,8 @@ export class GameComponent implements OnInit {
   hand: Card[] = [];
   commanderZone = false;
   graveyardZone = true;
-  link = 'https://static.wikia.nocookie.net/mtgsalvation_gamepedia/images/f/f8/Magic_card_back.jpg/revision/latest?cb=20140813141013'
+  dragPosition = {x: 0, y: 0};
+
 
   constructor(private readonly scryfallService: ScryfallAPIService){}
 

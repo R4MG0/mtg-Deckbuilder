@@ -29,11 +29,17 @@
     <!-- </div> -->
     <div class="cardContainer">
       <ng-container *ngFor="let card of hand">
-        <img
-          [src]="card.img"
-          alt="Foto of the card {{ card.name }}"
-          class="card"
-        />
+        <div
+          class="example-box"
+          cdkDrag
+          [cdkDragFreeDragPosition]="dragPosition"
+        >
+          <img
+            [src]="card.img"
+            alt="Foto of the card {{ card.name }}"
+            class="card"
+          />
+        </div>
       </ng-container>
       <app-library
         class="library"
