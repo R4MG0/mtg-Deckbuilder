@@ -1,10 +1,12 @@
 import sqlite3
 import requests
+import sys
+from sanitizer import sanitize
 
 # function to parse a single line of the decklist file
-def parse_card_line(card_line):
+def parse_card_line(prefix, card_line):
     card_line = card_line.strip()  # remove leading/trailing whitespace
-    amount, name = card_line.split('x ', 1)  # split line into amount and name
+    amount, name = card_line.split(prefix, 1)  # split line into amount and name
     return name, int(amount)
 
 # function to add cards to a deck in the database
@@ -14,6 +16,8 @@ def add_cards(conn, deck, card_list):
     cardamount = 0
     cursor = conn.cursor()
     for card_name, card_amount in card_list:
+        if(not sanitize(card_name)):
+            print(f"{card_name} is an invalid cardname, please contact the developer.")
         x = x + 1
         try:
             response = requests.get('https://api.scryfall.com/cards/named', params={'exact': card_name})
@@ -48,9 +52,17 @@ def add_cards(conn, deck, card_list):
         cardamount += card_amount
         if(x % 10 == 0): print(f'{cardamount} cards imported; last card {card_name}')
 
-    conn.commit()
+
     print(f'{cardamount} cards imported; last card {card_name}')
     print("Finished")
+    if(cardamount > 90):
+        commander = input("is this a commander deck? (Y/n)").lower()
+        if(commander == 'y'):
+          commander = input("what is the name of your commander? ")
+          print("not implemented yet")
+
+    conn.commit()
+
 # function to add a new deck to the database
 def add_deck(conn, deck_name):
     cursor = conn.cursor()
@@ -66,11 +78,12 @@ def add_deck(conn, deck_name):
 def import_deck(file_path, deck_name):
     conn = sqlite3.connect('storage.db')
     card_list = []
-
+    prefix = " "
     # read each line from the file and add the cards to the list
     with open(file_path, 'r') as f:
         for line in f:
-            card_name, card_amount = parse_card_line(line)
+            if(line[1] == 'x'): prefix = "x "
+            card_name, card_amount = parse_card_line(prefix, line)
             card_list.append((card_name, card_amount))
 
     add_cards(conn, deck_name, card_list)
@@ -81,8 +94,10 @@ def import_deck(file_path, deck_name):
 deckname = ''
 if __name__ == '__main__':
     # deckname = input("Whats your Deckname? ")
-    deckname = "Phyrexian"
-    if(deckname == '' or len(deckname) == 0):
-        print("Invalid deck")
+    try:
+        deckname = sys.argv[1]
+    except:
+        deckname = "Phyrexian"
+        print("Invalid deck, trying defined alternative {deckname}.")
     else:
         import_deck(f'{deckname}.txt', f'{deckname}')

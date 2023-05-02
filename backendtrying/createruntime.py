@@ -25,7 +25,9 @@ conn.execute('''CREATE TABLE hand
              name TEXT NOT NULL,
              img TEXT NOT NULL,
              deck TEXT NOT NULL,
-             controller TEXT NOT NULL)''')
+             controller TEXT NOT NULL,
+             zone TEXT NOT NULL,
+             attributes TEXT)''')
 
 conn.execute('''CREATE TABLE library
              (id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -39,28 +41,36 @@ conn.execute('''CREATE TABLE graveyard
              name TEXT NOT NULL,
              img TEXT NOT NULL,
              deck TEXT NOT NULL,
-             controller TEXT NOT NULL)''')
+             controller TEXT NOT NULL,
+             zone TEXT NOT NULL,
+             attributes TEXT)''')
 
 conn.execute('''CREATE TABLE battlefield
              (id INTEGER PRIMARY KEY AUTOINCREMENT,
              name TEXT NOT NULL,
              img TEXT NOT NULL,
              deck TEXT NOT NULL,
-             controller TEXT NOT NULL)''')
+             controller TEXT NOT NULL,
+             zone TEXT NOT NULL,
+             attributes TEXT)''')
 
 conn.execute('''CREATE TABLE exile
              (id INTEGER PRIMARY KEY AUTOINCREMENT,
              name TEXT NOT NULL,
              img TEXT NOT NULL,
              deck TEXT NOT NULL,
-             controller TEXT NOT NULL)''')
+             controller TEXT NOT NULL,
+             zone TEXT NOT NULL,
+             attributes TEXT)''')
 
 conn.execute('''CREATE TABLE phasedout
              (id INTEGER PRIMARY KEY AUTOINCREMENT,
              name TEXT NOT NULL,
              img TEXT NOT NULL,
              deck TEXT NOT NULL,
-             controller TEXT NOT NULL)''')
+             controller TEXT NOT NULL,
+             zone TEXT NOT NULL,
+             attributes TEXT)''')
 
 
 # Commit changes and close the connection

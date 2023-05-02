@@ -22,7 +22,7 @@
 
         fetch(
         //   "http://localhost:5000/load_deck?player_name=${playerName}&deck_name=${deckName}"
-        url
+        url, "POST"
         )
           .then((response) => {
             if (!response.ok) {

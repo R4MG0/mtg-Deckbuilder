@@ -20,6 +20,7 @@ def create_database():
                  name TEXT,
                  img TEXT,
                  deck TEXT,
+                 zone TEXT,
                  type TEXT)''')
 
     # Save the changes and close the connection
