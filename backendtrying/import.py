@@ -32,7 +32,7 @@ def add_cards(conn, deck, card_list):
                 if response.ok:
                     card_data = response.json()
                     card_image_url = card_data['card_faces'][0]['image_uris']['normal']
-                    
+
                     print(card_image_url)
                 if(card_image_url != '' and len(card_image_url) > 0):
                     cursor.execute("""

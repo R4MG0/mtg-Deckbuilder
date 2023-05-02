@@ -1,21 +1,25 @@
 from flask import Flask, request, jsonify
 import sqlite3
+import os
 
 app = Flask(__name__)
+
 
 @app.route('/example', methods=['GET'])
 def handle_example():
     name = request.args.get('name')
     return f'Hello, {name}!'
 
+
 @app.route('/load_deck', methods=['GET'])
 def load_deck():
     # get request parameters from JSON body
-    # deck_name = request.args.get('deck_name')
-    # player_name = request.args.get('player_name')
+    deck_name = request.args.get('deck_name')
+    player_name = request.args.get('player_name')
+    os.system(f'echo {deck_name} {player_name} > .tmp.txt')
 
-    deck_name = "Phyrexian"
-    player_name = "simi"
+    # deck_name = "Phyrexian"
+    # player_name = "simi"
 
     # connect to storage and runtime databases
     storage_conn = sqlite3.connect('storage.db')
@@ -23,17 +27,19 @@ def load_deck():
 
     # retrieve the cards for the specified deck from the storage database
     storage_cursor = storage_conn.cursor()
-    storage_cursor.execute('''SELECT name, img, deck FROM cards WHERE deck = ?''', (deck_name,))
+    storage_cursor.execute(
+        '''SELECT name, img, deck FROM cards WHERE deck = ?''', (deck_name,))
     cards = storage_cursor.fetchall()
     print(cards)
 
     # add the cards to the runtime database with the specified player name
     runtime_cursor = runtime_conn.cursor()
-    runtime_cursor.execute('''INSERT INTO players (name, deck) values (?, ?)''', (player_name, deck_name))
+    runtime_cursor.execute(
+        '''INSERT INTO players (name, deck) values (?, ?)''', (player_name, deck_name))
     for card in cards:
-        runtime_cursor.execute('''INSERT INTO library (name, img, deck, controller) values (?, ?, ?, ?)''', 
-        (card[0], card[1], card[2], player_name))
-    
+        runtime_cursor.execute('''INSERT INTO library (name, img, deck, controller) values (?, ?, ?, ?)''',
+                               (card[0], card[1], card[2], player_name))
+
     # player_id = 0
 
     # rows = runtime_cursor.fetchall()
@@ -50,12 +56,18 @@ def load_deck():
     #                                 (card_name, card[3], 'deck_name', player_name))
 
     # commit changes and close connections
+    os.system(f'del .tmp.txt')
     runtime_conn.commit()
     runtime_conn.close()
     storage_conn.close()
 
-    # return success message
-    return jsonify({'message': 'Deck loaded successfully.'})
-load_deck()
-# if __name__ == '__main__':
-#     app.run(debug=True)
+    try:
+        # return success message
+        return jsonify({'message': 'Deck loaded successfully.'})
+    except:
+        print("The response wasn't able to be send, doesn't matter if manual execute")
+
+
+# load_deck()
+if __name__ == '__main__':
+    app.run(debug=True)

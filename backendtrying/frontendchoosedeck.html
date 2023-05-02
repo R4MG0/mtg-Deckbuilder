@@ -17,11 +17,9 @@
       function loadDeck() {
         const deckName = document.getElementById("deck_name").value;
         const playerName = document.getElementById("player_name").value;
-        console.log("Deckname and Playername incomming");
-        console.log(deckName, playerName);
         // const url = `"http://127.0.0.1:5000/load_deck?player_name=${playerName}&deck_name=${deckName}"`;
         let url = `http://localhost:5000/load_deck?player_name=${playerName}&deck_name=${deckName}`
-        
+
         fetch(
         //   "http://localhost:5000/load_deck?player_name=${playerName}&deck_name=${deckName}"
         url
@@ -30,6 +28,7 @@
             if (!response.ok) {
               throw new Error("HTTP error " + response.status);
             }
+            console.log("resp: " + response)
             return response.json();
           })
           .then((data) => {
