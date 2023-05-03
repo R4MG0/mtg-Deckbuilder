@@ -20,6 +20,7 @@
     <span>Disable alerts</span>
   </button>
 </mat-menu>
+<!-- <div class="test"></div> -->
 
 <div class="footerContainer">
   <div class="commander"></div>
@@ -46,7 +47,8 @@
         [deck]="library"
         (newCard)="onChangeHand($event)"
       ></app-library>
-      <app-graveyard></app-graveyard>
+      <app-graveyard *ngIf="graveyardZone"></app-graveyard>
+      <app-exile></app-exile>
     </div>
   </div>
 </div>

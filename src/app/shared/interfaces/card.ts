@@ -5,4 +5,5 @@ export interface Card {
   type: string;
   deck: string;
   controller: string;
+  // zone: string;
 }

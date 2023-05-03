@@ -8,6 +8,7 @@ import { MatListModule} from '@angular/material/list';
 import { MatIconModule} from '@angular/material/icon';
 import { GraveyardComponent } from './components/graveyard/graveyard.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { ExileComponent } from './components/exile/exile.component';
 
 
 
@@ -15,7 +16,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
   declarations: [
     GameComponent,
     LibraryComponent,
-    GraveyardComponent
+    GraveyardComponent,
+    ExileComponent
   ],
   imports: [
     CommonModule,
