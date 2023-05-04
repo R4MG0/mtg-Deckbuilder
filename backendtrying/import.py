@@ -20,29 +20,32 @@ def add_cards(conn, deck, card_list):
             print(f"{card_name} is an invalid cardname, please contact the developer.")
         x = x + 1
         try:
-            response = requests.get('https://api.scryfall.com/cards/named', params={'exact': card_name})
-            if response.ok:
-                card_data = response.json()
-                card_image_url = card_data['image_uris']['normal']
-                card_type = card_data['type_line']
-            if(card_image_url != '' and len(card_image_url) > 0):
-                cursor.execute("""
-                INSERT INTO cards (name, img, deck, type)
-                VALUES (?, ?, ?, ?)
-            """, (card_name, card_image_url, deck, card_type))
-        except:
-            try:
+            for i in range(card_amount):
                 response = requests.get('https://api.scryfall.com/cards/named', params={'exact': card_name})
                 if response.ok:
                     card_data = response.json()
-                    card_image_url = card_data['card_faces'][0]['image_uris']['normal']
-
-                    print(card_image_url)
+                    card_image_url = card_data['image_uris']['normal']
+                    card_type = card_data['type_line']
                 if(card_image_url != '' and len(card_image_url) > 0):
                     cursor.execute("""
                     INSERT INTO cards (name, img, deck, type)
-                    VALUES (?, ?, ?, ?,)
+                    VALUES (?, ?, ?, ?)
                 """, (card_name, card_image_url, deck, card_type))
+        except:
+            try:
+                zone = "Mainboard"
+                for i in range(card_amount):
+                    response = requests.get('https://api.scryfall.com/cards/named', params={'exact': card_name})
+                    if response.ok:
+                        card_data = response.json()
+                        card_image_url = card_data['card_faces'][0]['image_uris']['normal']
+
+                        print(card_image_url)
+                    if(card_image_url != '' and len(card_image_url) > 0):
+                        cursor.execute("""
+                        INSERT INTO cards (name, img, deck, zone, type)
+                        VALUES (?, ?, ?, ?, ?,)
+                    """, (card_name, card_image_url, deck, zone, card_type))
             except:
                 print("idk")
                 # cursor.execute("""
@@ -98,6 +101,6 @@ if __name__ == '__main__':
         deckname = sys.argv[1]
     except:
         deckname = "Phyrexian"
-        print("Invalid deck, trying defined alternative {deckname}.")
-    else:
-        import_deck(f'{deckname}.txt', f'{deckname}')
+        print(f"Invalid deck, trying defined alternative {deckname}.")
+
+    import_deck(f'{deckname}.txt', f'{deckname}')

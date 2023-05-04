@@ -26,7 +26,7 @@ conn.execute('''CREATE TABLE hand
              img TEXT NOT NULL,
              deck TEXT NOT NULL,
              controller TEXT NOT NULL,
-             zone TEXT NOT NULL,
+             zone TEXT,
              attributes TEXT)''')
 
 conn.execute('''CREATE TABLE library
@@ -34,7 +34,9 @@ conn.execute('''CREATE TABLE library
              name TEXT NOT NULL,
              img TEXT NOT NULL,
              deck TEXT NOT NULL,
-             controller TEXT NOT NULL)''')
+             controller TEXT NOT NULL,
+             zone TEXT,
+             attributes TEXT)''')
 
 conn.execute('''CREATE TABLE graveyard
              (id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -42,7 +44,7 @@ conn.execute('''CREATE TABLE graveyard
              img TEXT NOT NULL,
              deck TEXT NOT NULL,
              controller TEXT NOT NULL,
-             zone TEXT NOT NULL,
+             zone TEXT,
              attributes TEXT)''')
 
 conn.execute('''CREATE TABLE battlefield
@@ -51,7 +53,7 @@ conn.execute('''CREATE TABLE battlefield
              img TEXT NOT NULL,
              deck TEXT NOT NULL,
              controller TEXT NOT NULL,
-             zone TEXT NOT NULL,
+             zone TEXT,
              attributes TEXT)''')
 
 conn.execute('''CREATE TABLE exile
@@ -60,7 +62,7 @@ conn.execute('''CREATE TABLE exile
              img TEXT NOT NULL,
              deck TEXT NOT NULL,
              controller TEXT NOT NULL,
-             zone TEXT NOT NULL,
+             zone TEXT,
              attributes TEXT)''')
 
 conn.execute('''CREATE TABLE phasedout
@@ -69,7 +71,7 @@ conn.execute('''CREATE TABLE phasedout
              img TEXT NOT NULL,
              deck TEXT NOT NULL,
              controller TEXT NOT NULL,
-             zone TEXT NOT NULL,
+             zone TEXT,
              attributes TEXT)''')
 
 
