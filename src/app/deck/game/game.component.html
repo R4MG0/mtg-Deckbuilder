@@ -20,6 +20,8 @@
     <span>Disable alerts</span>
   </button>
 </mat-menu>
+
+<div class="battleFieldContainer"></div>
 <!-- <div class="test"></div> -->
 
 <div class="footerContainer">
@@ -42,13 +44,13 @@
           />
         </div>
       </ng-container>
-      <app-library
-        class="library"
-        [deck]="library"
-        (newCard)="onChangeHand($event)"
-      ></app-library>
-      <app-graveyard *ngIf="graveyardZone"></app-graveyard>
-      <app-exile></app-exile>
     </div>
   </div>
+  <app-library
+    class="library"
+    [deck]="library"
+    (newCard)="onChangeHand($event)"
+  ></app-library>
+  <app-graveyard *ngIf="graveyardZone"></app-graveyard>
+  <app-exile></app-exile>
 </div>
