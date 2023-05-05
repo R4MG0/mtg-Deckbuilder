@@ -1,56 +1,63 @@
-<button
-  class="buttonForMultipleActions"
-  mat-icon-button
-  [matMenuTriggerFor]="menu"
-  aria-label="Example icon-button with a menu"
->
-  <mat-icon>more_vert</mat-icon>
-</button>
-<mat-menu #menu="matMenu">
-  <button mat-menu-item (click)="commanderAvailable()">
-    <mat-icon>dialpad</mat-icon>
-    <span>Commander</span>
+<div class="container">
+  <button
+    class="buttonForMultipleActions"
+    mat-icon-button
+    [matMenuTriggerFor]="menu"
+    aria-label="Example icon-button with a menu"
+  >
+    <mat-icon>more_vert</mat-icon>
   </button>
-  <button mat-menu-item (click)="graveyardAvailable()">
-    <mat-icon>voicemail</mat-icon>
-    <span>Graveyard</span>
-  </button>
-  <button mat-menu-item disabled>
-    <mat-icon>notifications_off</mat-icon>
-    <span>Disable alerts</span>
-  </button>
-</mat-menu>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="commanderAvailable()">
+      <mat-icon>dialpad</mat-icon>
+      <span>Commander</span>
+    </button>
+    <button mat-menu-item (click)="graveyardAvailable()">
+      <mat-icon>voicemail</mat-icon>
+      <span>Graveyard</span>
+    </button>
+    <button mat-menu-item disabled>
+      <mat-icon>notifications_off</mat-icon>
+      <span>Disable alerts</span>
+    </button>
+  </mat-menu>
+  <div class="ownStuff">
+    <app-battlefield></app-battlefield>
+    <!-- <div class="test"></div> -->
 
-<app-battlefield></app-battlefield>
-<!-- <div class="test"></div> -->
-
-<div class="footerContainer">
-  <div class="commander"></div>
-  <div class="bigCardcontainer">
-    <!-- <div class="graveyardContainer"> -->
-    <!-- <div class="graveyard"></div> -->
-    <!-- </div> -->
-    <div class="cardContainer">
-      <ng-container *ngFor="let card of hand">
-        <div
-          class="example-box"
-          cdkDrag
-          [cdkDragFreeDragPosition]="dragPosition"
-        >
-          <img
-            [src]="card.img"
-            alt="Foto of the card {{ card.name }}"
-            class="card"
-          />
+    <div class="footerContainer">
+      <div class="commander"></div>
+      <div class="biggerContainerThenCardContainer">
+        <div class="bigCardcontainer">
+          <!-- <div class="graveyardContainer"> -->
+          <!-- <div class="graveyard"></div> -->
+          <!-- </div> -->
+          <div class="cardContainer">
+            <ng-container *ngFor="let card of hand">
+              <div
+                class="example-box"
+                cdkDrag
+                [cdkDragFreeDragPosition]="dragPosition"
+              >
+                <img
+                  [src]="card.img"
+                  alt="Foto of the card {{ card.name }}"
+                  class="card"
+                />
+              </div>
+            </ng-container>
+          </div>
         </div>
-      </ng-container>
+        <!-- <div class="stacks"> -->
+        <app-library
+          class="library"
+          [deck]="library"
+          (newCard)="onChangeHand($event)"
+        ></app-library>
+        <app-graveyard *ngIf="graveyardZone"></app-graveyard>
+        <app-exile></app-exile>
+        <!-- </div> -->
+      </div>
     </div>
   </div>
-  <app-library
-    class="library"
-    [deck]="library"
-    (newCard)="onChangeHand($event)"
-  ></app-library>
-  <app-graveyard *ngIf="graveyardZone"></app-graveyard>
-  <app-exile></app-exile>
 </div>
