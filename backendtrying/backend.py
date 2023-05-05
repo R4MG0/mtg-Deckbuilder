@@ -59,7 +59,7 @@ def load_deck():
     # get request parameters from JSON body
     deck_name = request.args.get('deck_name')
     player_name = request.args.get('player_name')
-    os.system(f'echo {deck_name} {player_name} > .tmp.txt')
+    os.system(f'echo {deck_name} {player_name} > .deck.txt')
 
     # deck_name = "Phyrexian"
     # player_name = "simi"
