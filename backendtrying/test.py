@@ -30,3 +30,12 @@ response = requests.post(url, data=data)
 
 # Print the response
 print(response.text)
+
+# Shuffle library test
+
+url = 'http://localhost:5000/shuffle'
+
+data = {'deck': 'Phyrexian'}
+
+resp = requests.post(url, data=data)
+print(resp.text)

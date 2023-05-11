@@ -47,7 +47,7 @@ def add_cards(conn, deck, card_list):
                         VALUES (?, ?, ?, ?, ?,)
                     """, (card_name, card_image_url, deck, zone, card_type))
             except:
-                print("idk")
+                print("Probably doublesided card, images not supported yet.")
                 # cursor.execute("""
                 #     INSERT INTO cards (name, deck, type)
                 #     VALUES (?, ?, ?)

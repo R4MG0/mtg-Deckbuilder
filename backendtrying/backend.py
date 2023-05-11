@@ -61,7 +61,7 @@ def read_post_param():
     except:
         print(f"there was an error while sending data via websocket ({info})")
         return f'problem sending data {info}'
-    
+
     return f'Moved card: {card[1]}|{info}'
 
 @app.route('/changecontroller', methods=['POST'])
@@ -77,10 +77,10 @@ def changeController():
 
     rc = db_connect()
     c = rc.cursor()
-    
+
     c.execute(f"UPDATE {position} SET controller = '{controller}' WHERE id = {cardId}")
     print(f"UPDATE {position} SET controller='{controller}' WHERE id={cardId}")
-    
+
     db_close(rc)
     return "success"
 
@@ -141,25 +141,40 @@ def load_deck():
         print("The response wasn't able to be send, doesn't matter if manual execute")
 
 
-@app.route('/shuffle_library/<deck>')
-def shuffle_library(deck):
-    return "not implemented yet"
+@app.route('/shuffle', methods=['POST'])
+def shuffle(deck):
+    # return "not implemented yet"
+    deck = request.form.get('deck')
     conn = db_connect()
     cur = conn.cursor()
 
-    cur.execute(
-        f"SELECT COUNT(*) FROM library WHERE deck = ?", (deck,))
-    num_cards = cur.fetchone()[0]
-    card_ids = list(range(1, num_cards+1))
-    random.shuffle(card_ids)
+    r = "first card: "
+    cur.execute(f"SELECT name FROM library WHERE deck={deck} LIMIT 1")
+    r += cur.fetchone()[1]
+    # cur.execute(
+    #     f"SELECT (*) FROM library WHERE deck = ?", (deck,))
+    # num_cards = cur.fetchone()[0]
+    # card_ids = list(range(1, num_cards+1))
+    # random.shuffle(card_ids)
 
-    for i, card_id in enumerate(card_ids, 1):
-        cur.execute(
-            f"UPDATE library SET id = ? WHERE id = ? AND deck = ?", (i, card_id, deck))
+    # for i, card_id in enumerate(card_ids, 1):
+    #     cur.execute(
+    #         f"UPDATE library SET id = ? WHERE id = ? AND deck = ?", (i, card_id, deck))
+
+    cur.execute(
+        f"SELECT * FROM library WHERE deck = ?", (deck,))
+    deck = []
+    deck = cur.fetchall()
+
+    deck.shuffle()
+    r += ", last card: "
+    r += deck[0]
+    print(deck.size())
+
+
 
     db_close(conn)
-
-    return "Library shuffled"
+    return r
 
 
 @app.route('/draw_card/<deck>')
