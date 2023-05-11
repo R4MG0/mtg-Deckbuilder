@@ -15,6 +15,10 @@ def db_close(conn):
     conn.commit()
     conn.close()
 
+async def sendData(data):
+    async with websockets.connect("ws://localhost:8765") as websocket:
+            await websocket.send(data)
+
 
 @app.route('/move', methods=['POST'])
 def read_post_param():
@@ -22,14 +26,14 @@ def read_post_param():
     origin = request.form.get('from')
     newpos = request.form.get('to')
     cardId = request.form.get('cardId')
-    print(cardId)
+    info = f"{origin};{newpos};{cardId}"
 
     conn = db_connect()
     cur = conn.cursor()
     try:
         print(origin)
         # Try to fetch card to go sure it exists
-        cmd = f"SELECT id, name, img, deck, controller, zone, attributes FROM {origin} WHERE id={cardId}"
+        cmd = f"SELECT id, name, img, deck, controller, zone, attributes FROM {origin} WHERE id={cardId} LIMIT 1"
         print(cmd)
         # cur.execute(cmd)
         # cur.execute("""SELECT * FROM ? WHERE id = ?""", (origin, cardId,))
@@ -51,7 +55,34 @@ def read_post_param():
     cur.execute(f"INSERT INTO {newpos} (name, img, deck, controller, zone, attributes) VALUES (?,?,?,?,?,?)", (card[1],card[2],card[3],card[4],card[5],card[6]))
     db_close(conn)
     #  Return a response
-    return f'Moved card: {card[1]}'
+    try:
+        # WS
+        sendData(info)
+    except:
+        print(f"there was an error while sending data via websocket ({info})")
+        return f'problem sending data {info}'
+    
+    return f'Moved card: {card[1]}|{info}'
+
+@app.route('/changecontroller', methods=['POST'])
+def changeController():
+    # Requires the position of the card
+    # the id of the card so there's no room
+    # for error
+    # and the new controller, which should be set
+    position = request.form.get('position')
+    cardId = request.form.get('cardId')
+    controller = request.form.get('controller')
+    info = f"{position};{cardId};{controller}"
+
+    rc = db_connect()
+    c = rc.cursor()
+    
+    c.execute(f"UPDATE {position} SET controller = '{controller}' WHERE id = {cardId}")
+    print(f"UPDATE {position} SET controller='{controller}' WHERE id={cardId}")
+    
+    db_close(rc)
+    return "success"
 
 
 @app.route('/load_deck', methods=['GET'])
@@ -112,6 +143,7 @@ def load_deck():
 
 @app.route('/shuffle_library/<deck>')
 def shuffle_library(deck):
+    return "not implemented yet"
     conn = db_connect()
     cur = conn.cursor()
 
@@ -131,10 +163,10 @@ def shuffle_library(deck):
 
 
 @app.route('/draw_card/<deck>')
-def draw_card(deck):
+def draw_card():
     conn = db_connect()
     cur = conn.cursor()
-
+    deck = request.form.get('deck')
     cur.execute(
         f"SELECT id, name, img FROM library WHERE deck = ? ORDER BY id ASC LIMIT 1", (deck,))
     card = cur.fetchone()

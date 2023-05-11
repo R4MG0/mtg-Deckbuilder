@@ -38,6 +38,14 @@ conn.execute('''CREATE TABLE library
              zone TEXT,
              attributes TEXT)''')
 
+conn.execute('''CREATE TABLE commander
+             (id INTEGER PRIMARY KEY AUTOINCREMENT,
+             name TEXT NOT NULL,
+             img TEXT NOT NULL,
+             deck TEXT NOT NULL,
+             controller TEXT NOT NULL,
+             zone TEXT)''')
+
 conn.execute('''CREATE TABLE graveyard
              (id INTEGER PRIMARY KEY AUTOINCREMENT,
              name TEXT NOT NULL,

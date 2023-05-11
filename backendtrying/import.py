@@ -101,6 +101,9 @@ if __name__ == '__main__':
         deckname = sys.argv[1]
     except:
         deckname = "Phyrexian"
+        fullimport = True
         print(f"Invalid deck, trying defined alternative {deckname}.")
 
     import_deck(f'{deckname}.txt', f'{deckname}')
+    if fullimport:
+        requests.get(f'http://localhost:5000/load_deck?player_name={"somelazyplayer"}&deck_name={deckname}')
