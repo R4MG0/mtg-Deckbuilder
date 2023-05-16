@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Loginpage</h2>
+    <form onSubmit="send()">
+        <input type="text" id="un" placeholder="Username">
+        <input type="password" id="pw" placeholder="***********">
+        <button type="submit">login</button>
+    </form type="submit">
+    <script>
+        function send() {
+            // get values
+            un = document.getElementById("un").value;
+            pw = document.getElementById("pw").value;
+            // get key
+            alert("test")
+            fetch('http://127.0.0.1:5000/api/get_data')
+            .then(response => response.text())
+            .then(data => alert(data))
+            .catch(error => console.error(error));
+            alert("test")
+            console.log(`got data ${data}`)
+            // set the key
+            localStorage.setItem('username', 'test');
+        }
+
+        
+    </script>
+</body>
+</html>

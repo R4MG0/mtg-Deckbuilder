@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form onSubmit="send()">
+        <label>Username</label>
+        <input type="text" name="username" id="username" />
+        <label>Password</label>
+        <input type="password" name="password" id="password" />
+        <label>IBAN</label>
+        <input type="text" name="iban" id="iban" />
+        <button type="submit">Login</button>
+        <h2 id="resp"></h2>
+    </form>
+    <script>
+        function send() {
+
+
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+            let iban = document.getElementById("iban").value;
+            console.log(`${username}, ${password}, ${iban}`);
+            alert('test')
+            const url = 'http://localhost:5000/register';
+
+            const data = new FormData();
+            data.append('username', username);
+            data.append('password', password);
+            data.append('iban', iban);
+
+            // Optionen für den Fetch-Request
+            const options = {
+            method: 'POST',
+            body: data
+            };
+
+            // Der eigentliche POST-Request
+            fetch(url, options)
+            .then(response => {
+                if (!response.ok) {
+                alert('Fehler beim POST-Request: ' + response.status);
+                }
+                return response.text();
+            })
+            .then(responseText => {
+                alert('Antwort vom Server:', responseText);
+                const key = responseText.split(':')[1];
+                alert(`key: ${key}`);
+                return key;
+            })
+            .catch(error => {
+                alert(error);
+                return null;
+            });
+                        
+
+                    
+        }
+        
+    </script>
+</body>
+</html>
